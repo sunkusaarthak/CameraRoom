@@ -9,7 +9,6 @@ import android.os.Bundle
 import android.os.Environment
 import android.os.Vibrator
 import android.provider.MediaStore
-import android.util.Log
 import android.view.View
 import android.widget.ImageView
 import android.widget.Toast
@@ -18,9 +17,6 @@ import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import kotlinx.coroutines.DelicateCoroutinesApi
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.GlobalScope
-import kotlinx.coroutines.launch
 import java.io.File
 import java.io.FileOutputStream
 import java.io.IOException
@@ -75,7 +71,7 @@ class MainActivity : AppCompatActivity() {
                 val cameraIntent = Intent(MediaStore.ACTION_IMAGE_CAPTURE)
                 startActivityForResult(cameraIntent, CAMERA_REQUEST_CODE)
             } else {
-                Toast.makeText(this, "Sorry!, Permission Denied.", Toast.LENGTH_SHORT).show()
+                Toast.makeText(this, "Sorry!,n Permission Denied.", Toast.LENGTH_SHORT).show()
             }
         }
     }
@@ -114,14 +110,6 @@ class MainActivity : AppCompatActivity() {
 
     @OptIn(DelicateCoroutinesApi::class)
     private fun pushImageLocationToRoom(fileLocation : String) {
-        /*val f =FilenameRepository(this)
-        GlobalScope.launch(Dispatchers.IO) {
-            f.insert(fileLocation)
-            val items = f.getAllItems()
-            for(str in items) {
-                Log.d("image location", str.location)
-            }
-        }*/
         val location = ImageLocation(location = fileLocation)
         imageLocationViewModel.addImageLocationItem(location)
     }
